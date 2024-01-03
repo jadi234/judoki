@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produk Bisa Dijual</title>
+    
+    <!-- Tambahkan kode CSS di bawah ini -->
+    <style>
+        .scrollable-table {
+            max-height: 400px; /* Atur ketinggian maksimum tabel di sini sesuai kebutuhan Anda */
+            overflow-y: auto; /* Aktifkan scroll vertikal */
+            display: block; /* Untuk memastikan overflow bekerja dengan baik */
+        }
+    </style>
+    <!-- Akhir kode CSS -->
+    
+</head>
+<body>
+    <h2>Data Produk yang Bisa Dijual</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID Produk</th>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>kategori</th>
+                <th>status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in produk %}
+            <tr>
+                <td>{{ p[0] }}</td>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+                <td>{{ p[3] }}</td> <!-- Menampilkan kategori_id -->
+                <td>{{ p[4] }}</td>
+              
+               
+                <td>
+                    <form action="/delete/{{ p[0] }}" method="post" onsubmit="return confirm('Apakah Anda yakin ingin menghapus produk ini?');">
+                        <input type="submit" value="Hapus">
+                    </form>
+                    <!-- Tambahkan tombol Edit -->
+                    <a href="/edit/{{ p[0] }}" onclick="return confirmEdit()">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="/add">Tambah Produk</a>
+
+    <script>
+        function confirmEdit() {
+            return confirm('Apakah Anda yakin ingin mengedit produk ini?');
+        }
+    </script>
+</body>
+</html>
